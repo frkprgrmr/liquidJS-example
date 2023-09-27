@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+      }
+      
+      th, td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: left;
+      }
+      
+      th {
+        background-color: #f2f2f2;
+      }
+      
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Render List of Object</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>gender</th>
+          <th>Age</th>
+          <th>Address</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for person in listObject %}
+          <tr>
+            <td>{{ person.name }}</td>
+            <td>{{ person.gender }}</td>
+            <td>{{ person.age }}</td>
+            <td>{{ person.address }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <h2>Render Object Data Structure</h2>
+    <p>hello my name is {{objectData.name}}, im {{objectData.age}} yo and i live in {{objectData.address}}  </p>
+    <h2>Render Array Data Structure</h2>
+    <ul>
+      {% for item in arrayData %}
+        <li>{{ item }}</li>
+      {% endfor %}
+    </ul>
+  </body>
+  </html>
+  

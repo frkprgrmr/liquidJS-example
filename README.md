@@ -1,3 +1,6 @@
-# LiquidJS for Node.js
-
 ## Get Started
+
+```bash
+yarn install
+yarn start
+```

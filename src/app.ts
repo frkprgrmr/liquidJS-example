@@ -1,24 +1,26 @@
 import express from "express";
 import { Liquid } from "liquidjs";
+import { makeData } from "./makeData";
 
 const app = express();
 const engine = new Liquid();
 
-app.get("/", async (req, res) => {
-  try {
-    const template = "Hello, {{ name }}!";
-    const context = { name: "World" };
+app.engine("liquid", engine.express()); // register liquid engine
+app.set("views", __dirname + "/views");
+app.set("view engine", "liquid");
 
-    const rendered = await engine.parseAndRender(template, context);
-
-    res.send(rendered);
-  } catch (error) {
-    console.error("Error rendering Liquid template:", error);
-    res.status(500).send("Internal Server Error");
-  }
+const listObject = makeData(10);
+const objectData = listObject[0];
+const arrayData = listObject.map((val) => val.name);
+app.get("/", (req, res) => {
+  res.render("layout", {
+    listObject,
+    objectData,
+    arrayData,
+    title: "Welcome to liquidjs!",
+  });
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+app.listen(3000, () => {
+  console.log("Server is running on http://localhost:3000");
 });
